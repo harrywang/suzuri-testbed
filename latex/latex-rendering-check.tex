@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage[numbers]{natbib}
+\usepackage{hyperref}
+
+\title{Ink Density Saturation in Duan Inkstones:\\A Rendering Check}
+\author{Harry Wang}
+\date{August 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+A short sample document for testing \texttt{.tex} rendering, syntax
+highlighting, and citation handling. The content mirrors the vault's
+notes on grinding ink: density saturates as a function of grind time,
+and the stone --- not the stick --- sets the ceiling.
+\end{abstract}
+
+\section{Introduction}
+
+Grinding ink is a slow circular process: water is added \emph{a few
+drops} at a time, and the stone decides how dark the ink gets. Prior
+work established the density--time relationship empirically
+\citep{tanaka2019}, while the classical treatment of stone provenance
+goes back much further \citep{mizuta1968}. A modern survey is given by
+\citet{chen2021}.
+
+\section{Model}
+
+Let $D(t)$ denote ink density after $t$ minutes of grinding. Density
+follows a saturating exponential,
+\begin{equation}
+  \label{eq:density}
+  D(t) = D_{\max}\left(1 - e^{-t/\tau}\right),
+\end{equation}
+where $D_{\max}$ is the stone-specific ceiling and $\tau$ the time
+constant. Saturation is effectively reached near $t^* \approx 4$ min,
+since from Equation~\eqref{eq:density},
+\begin{align}
+  \frac{D(t^*)}{D_{\max}} &= 1 - e^{-t^*/\tau} \\
+                          &\approx 0.98 \quad \text{for } \tau \approx 1\ \text{min}.
+\end{align}
+
+Inline math also needs checking: the residual is $\varepsilon(t) =
+D_{\max} e^{-t/\tau}$, and $\lim_{t \to \infty} \varepsilon(t) = 0$.
+
+\section{Stones}
+
+Table~\ref{tab:stones} lists the stones used in the vault's notes.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{llrl}
+    \toprule
+    Stone & Origin    & Year & Grind \\
+    \midrule
+    Duan  & Guangdong & 1782 & slow  \\
+    She   & Anhui     & 1854 & fine  \\
+    \bottomrule
+  \end{tabular}
+  \caption{Inkstones referenced in the grinding notes.}
+  \label{tab:stones}
+\end{table}
+
+\section{Conclusion}
+
+If this document compiles, renders with highlighting, and resolves all
+three citations from \texttt{references.bib}, the check passes.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

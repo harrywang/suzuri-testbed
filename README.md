@@ -1,6 +1,6 @@
-# suzuri-notes
+# suzuri-testbed
 
-A test vault for [Suzuri](https://github.com/harrywang/suzuri). The `notes/` files exercise markdown live preview; `code/` exercises Python execution and notebook rendering.
+A test vault for [Suzuri](https://github.com/harrywang/suzuri). The `md/` files exercise markdown live preview; `code/` exercises Python execution and notebook rendering; `latex/`, `typst/`, and `pdf/` exercise LaTeX, Typst, and PDF rendering.
 
 This README covers the one-time Python setup needed before anything in `code/` will run.
 
@@ -17,12 +17,12 @@ Both use the same Jupyter kernel underneath, so the setup below serves both.
 
 ## One-time setup with uv
 
-Suzuri finds Python kernels by scanning the **worktree root** for Python environments, then running `python -c "import ipykernel"` against each one. Only environments where that import succeeds are offered as kernels. So the environment has to live at the root of the folder you open in Suzuri — here, `suzuri-notes/` itself.
+Suzuri finds Python kernels by scanning the **worktree root** for Python environments, then running `python -c "import ipykernel"` against each one. Only environments where that import succeeds are offered as kernels. So the environment has to live at the root of the folder you open in Suzuri — here, `suzuri-testbed/` itself.
 
 From the vault root:
 
 ```sh
-cd ~/sandbox/suzuri-notes
+cd ~/sandbox/suzuri-testbed
 uv venv                        # creates .venv/ using your default Python
 uv pip install ipykernel       # the only hard requirement
 ```
@@ -77,7 +77,7 @@ This is fixed on the Suzuri branch `worktree-notebook-default-on`, which turns n
 Until then, launch the installed app's binary directly with the dev escape hatch:
 
 ```sh
-LOCAL_NOTEBOOK_DEV=1 /Applications/Suzuri.app/Contents/MacOS/zed ~/sandbox/suzuri-notes
+LOCAL_NOTEBOOK_DEV=1 /Applications/Suzuri.app/Contents/MacOS/zed ~/sandbox/suzuri-testbed
 ```
 
 Launching from Finder or with `open -a Suzuri` will **not** work — macOS does not forward environment variables that way, so it has to be the binary path.
