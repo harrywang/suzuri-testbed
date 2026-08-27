@@ -17,7 +17,6 @@ $$D(t) = D_{\max}\left(1 - e^{-t/\tau}\right)$$
 - [x] Photograph the well before it dries
 - [ ] Weigh the stick after twelve minutes
 
-Table rendering is verified in [[table-rendering-check]], math in [[math-rendering-check]],
-and image reloading in [[image-reload-check]].
+Rendering is verified surface by surface: tables in [[table-rendering-check]], math in [[math-rendering-check]], callouts in [[callout-rendering-check]], highlights and tags and footnotes in [[inline-rendering-check]], transclusion in [[embed-rendering-check]], the Properties card in [[frontmatter-rendering-check]], block-edge editing in [[block-interaction-check]], and image reloading in [[image-reload-check]].
 
 *Notes continue in [[reading-list]].*
