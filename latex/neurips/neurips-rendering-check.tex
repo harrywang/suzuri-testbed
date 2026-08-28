@@ -1,0 +1,80 @@
+\documentclass{article}
+
+% Submission mode (no option) anonymises the authors and turns on the
+% line numbers down the margin, which is the most distinctive thing this
+% template renders. `preprint` or `final` would switch both off.
+\usepackage{neurips_2026}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+\usepackage{microtype}
+
+\title{Ink Density Saturation in Duan Inkstones}
+
+\author{%
+  David S.~Hippocampus\thanks{Placeholder author from the NeurIPS template;
+    submission mode hides this block.} \\
+  Department of Inkstone Studies\\
+  Cranberry-Lemon University\\
+  Pittsburgh, PA 15213 \\
+  \texttt{hippo@cs.cranberry-lemon.edu} \\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  A minimal document in the NeurIPS 2026 format. The content mirrors
+  \texttt{latex-rendering-check.tex}: ink density saturates as a function
+  of grind time, and the stone --- not the stick --- sets the ceiling.
+\end{abstract}
+
+\section{Model}
+
+Let $D(t)$ denote ink density after $t$ minutes of grinding. Density
+follows a saturating exponential,
+\begin{equation}
+  \label{eq:density}
+  D(t) = D_{\max}\left(1 - e^{-t/\tau}\right),
+\end{equation}
+where $\tau$ is the stone's time constant and $D_{\max}$ its ceiling. The
+relationship was established empirically by \citet{tanaka2019}, and half
+saturation is reached at $\nicefrac{\ln 2}{1} \cdot \tau$.
+
+\section{Results}
+
+Table~\ref{tab:stones} lists time constants for three stones. The
+grinding surface, not the ink stick, dominates \citep{mizuta1968}.
+
+\begin{table}[t]
+  \caption{Saturation parameters by stone.}
+  \label{tab:stones}
+  \centering
+  \begin{tabular}{lrr}
+    \toprule
+    Stone & $\tau$ (min) & $D_{\max}$ \\
+    \midrule
+    Duan (Laokeng)   & 4.1 & 0.94 \\
+    Duan (Majiakeng) & 6.8 & 0.87 \\
+    She              & 9.2 & 0.81 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Checklist}
+
+Opening this file and pressing preview should produce a single-column PDF
+with line numbers down the left margin, the NeurIPS footer on page one, a
+numbered equation, a booktabs table, and resolved citations to
+\citet{tanaka2019} and \citet{chen2021}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

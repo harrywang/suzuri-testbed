@@ -52,9 +52,13 @@ Each folder holds one source document (`latex-rendering-check.tex`, `typst-rende
 
 `latex/aaai/` covers the case those two cannot: a document that dictates its engine. AAAI's style calls `\RequirePDFTeX`, so `aaai-pdftex-check.tex` builds under pdfTeX and aborts under XeTeX with "pdfTeX is required to compile this document. Sorry!" — the check is that preview picks an engine the template accepts. Many IEEE styles pin the engine the same way. It ships the unmodified `aaai2027.sty` and `.bst` it needs, and the reference PDF is the two-column output a correct build produces.
 
+`latex/aaai/expected/` holds what the first preview should look like on a machine with no TeX at all: `install-prompt.png` is the offer, and `installing-toolchain.png` is the toast that replaces it once accepted. The second one matters — provisioning takes far longer than a compile, so if that toast ever says "Compiling…" again, a first run will look like a hang.
+
 Two things about the source are load-bearing and easy to "fix" into breakage: the empty `\affiliations{}` block is required even for an anonymous submission (`\maketitle` expands it unconditionally), and there is deliberately no `\bibliographystyle` line, because the style file sets it and a second one makes bibtex fail.
 
 It also exercises on-demand package installation: the template pulls in `newtx`, `caption`, `courier`, and `tex-gyre`, among others, which a minimal TeX Live will not have until something fetches them.
+
+`latex/neurips/` is the other half of that pair. NeurIPS pins no engine, so it builds under pdfTeX, XeTeX, or LuaTeX alike — what it covers instead is a different package set (`lineno`, `environ`, `units`, `microtype`) and a visibly different page. Left in submission mode, `neurips-rendering-check.tex` anonymises the authors and prints line numbers down the left margin, so a preview that silently loses `lineno` is obvious at a glance rather than only in a log. Adding a `preprint` or `final` option to the `\usepackage` line switches both off, which is a quick way to check the template still responds to its options.
 
 ## pdf/ — PDF viewer
 
