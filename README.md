@@ -50,6 +50,12 @@ uv add ipykernel numpy pandas matplotlib
 
 Each folder holds one source document (`latex-rendering-check.tex`, `typst-rendering-check.typ`), the `references.bib` it cites, and the reference PDF it should produce. Together they exercise the `.tex`/`.typ` preview button end to end, including bibliography resolution.
 
+`latex/aaai/` covers the case those two cannot: a document that dictates its engine. AAAI's style calls `\RequirePDFTeX`, so `aaai-pdftex-check.tex` builds under pdfTeX and aborts under XeTeX with "pdfTeX is required to compile this document. Sorry!" — the check is that preview picks an engine the template accepts. Many IEEE styles pin the engine the same way. It ships the unmodified `aaai2027.sty` and `.bst` it needs, and the reference PDF is the two-column output a correct build produces.
+
+Two things about the source are load-bearing and easy to "fix" into breakage: the empty `\affiliations{}` block is required even for an anonymous submission (`\maketitle` expands it unconditionally), and there is deliberately no `\bibliographystyle` line, because the style file sets it and a second one makes bibtex fail.
+
+It also exercises on-demand package installation: the template pulls in `newtx`, `caption`, `courier`, and `tex-gyre`, among others, which a minimal TeX Live will not have until something fetches them.
+
 ## pdf/ — PDF viewer
 
 `tanaka-2019.pdf` — the (fictional) paper the markdown notes cite, doing double duty as the PDF-viewer fixture.

@@ -1,0 +1,87 @@
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+\usepackage[submission]{aaai2027}  % DO NOT CHANGE THIS
+\usepackage{times}  % DO NOT CHANGE THIS
+\usepackage{helvet} % DO NOT CHANGE THIS
+\usepackage{courier}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in}  % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in}  % DO NOT CHANGE THIS
+
+% Recommended for better-looking tables.
+\usepackage{booktabs}
+
+\pdfinfo{
+/TemplateVersion (2027.1)
+}
+
+\setcounter{secnumdepth}{0}
+
+\title{Ink Density Saturation in Duan Inkstones}
+% An anonymous submission names no authors and leaves affiliations empty,
+% but the \affiliations block itself is required: \maketitle expands
+% \aaai@affiliations unconditionally.
+\author{
+    Anonymous Submission
+}
+\affiliations{
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+A minimal document in the AAAI 2027 submission format. The content
+mirrors \texttt{latex-rendering-check.tex}: ink density saturates as a
+function of grind time, and the stone --- not the stick --- sets the
+ceiling.
+\end{abstract}
+
+\section{Model}
+
+Let $D(t)$ denote ink density after $t$ minutes of grinding. Density
+follows a saturating exponential,
+\begin{equation}
+  \label{eq:density}
+  D(t) = D_{\max}\left(1 - e^{-t/\tau}\right),
+\end{equation}
+where $\tau$ is the stone's time constant and $D_{\max}$ its ceiling.
+The relationship was established empirically by \citet{tanaka2019}.
+
+\section{Results}
+
+Table~\ref{tab:stones} lists time constants for three stones. The
+grinding surface, not the ink stick, dominates.
+
+\begin{table}[t]
+\centering
+\begin{tabular}{lrr}
+\toprule
+Stone & $\tau$ (min) & $D_{\max}$ \\
+\midrule
+Duan (Laokeng)  & 4.1 & 0.94 \\
+Duan (Majiakeng) & 6.8 & 0.87 \\
+She             & 9.2 & 0.81 \\
+\bottomrule
+\end{tabular}
+\caption{Saturation parameters by stone.}
+\label{tab:stones}
+\end{table}
+
+\section{Checklist}
+
+Opening this file and pressing preview should produce a two-column PDF
+with the AAAI running head, a numbered equation, a booktabs table, and a
+resolved citation to \citet{tanaka2019} in the references.
+
+% aaai2027.sty sets the bibliographystyle itself; declaring it again makes
+% bibtex fail with "Illegal, another \bibstyle command".
+\bibliography{references}
+
+\end{document}
