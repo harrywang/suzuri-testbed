@@ -20,4 +20,5 @@ latex/**/*.fls
 latex/**/*.fdb_latexmk
 latex/**/*.synctex.gz
 latex/**/missfont.log
-refs/
+# the picker copies PDFs here; the library itself stays tracked
+refs/*.pdf
