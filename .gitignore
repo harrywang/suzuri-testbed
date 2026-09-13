@@ -20,3 +20,4 @@ latex/**/*.fls
 latex/**/*.fdb_latexmk
 latex/**/*.synctex.gz
 latex/**/missfont.log
+refs/
