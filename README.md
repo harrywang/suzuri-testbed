@@ -37,8 +37,9 @@ A small interlinked vault themed around inkstones (suzuri, 硯).
 
 - `python-rendering-check.py` — a `# %%`-celled script for the inline REPL. Put the cursor in a cell and run `repl::Run` (`ctrl-shift-enter`).
 - `notebook-rendering-check.ipynb` — a run-through for the notebook editor whose cells produce each output kind in turn: an image, an HTML table, a traceback, interleaved stdout/stderr streams, plus markdown cells with math and a deliberately unexecuted cell.
+- `notebook-image-fit-check.ipynb` — covers [suzuri#74](https://github.com/harrywang/suzuri/pull/74): a chart wider than the notebook pane must shrink to fit instead of being clipped on the right, keep its aspect ratio as the pane is resized, and a chart smaller than the pane must stay at its natural size.
 
-Both need a Python environment with `ipykernel` at the vault root. One-time setup, following the [uv project workflow](https://docs.astral.sh/uv/guides/integration/jupyter/):
+All three need a Python environment with `ipykernel` at the vault root. One-time setup, following the [uv project workflow](https://docs.astral.sh/uv/guides/integration/jupyter/):
 
 ```sh
 cd ~/sandbox/suzuri-testbed
