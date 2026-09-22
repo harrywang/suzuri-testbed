@@ -6,7 +6,7 @@ csl: apa
 
 The citation picker searches this vault's `.bib` files and, when Zotero is running with its local API on, the Zotero library too. Picking a Zotero item writes the entry to `refs/refs.bib` at the vault root under a key Suzuri mints, copies the PDF to `refs/<key>.pdf`, and inserts the citation at the cursor. This note is for a Zotero that holds at least one paper with a PDF; the checks below assume the SkillsBench preprint (arXiv 2602.12670), but any paper works if you adjust the search words.
 
-One-time setup: in Zotero, Settings → Advanced → tick "Allow other applications on this computer to communicate with Zotero". Without it the picker still searches the vault and its footer names the box to tick.
+One-time setup: in Zotero, Settings → Advanced → tick "Allow other applications on this computer to communicate with Zotero". Without it the picker still searches the project's `.bib` files and its footer names the box to tick.
 
 - [ ] Section 1 inserts a Zotero paper and records it in `refs/`
 - [ ] Section 2 offers vault entries first and dedupes a paper already in the vault
@@ -19,7 +19,7 @@ One-time setup: in Zotero, Settings → Advanced → tick "Allow other applicati
 
 Put the cursor at the end of this sentence and press `cmd-alt-c`: agent skills raise pass rates on expertise-heavy tasks
 
-Type `skills`. After a beat the list shows the SkillsBench preprint with its authors and year, marked "Zotero". Press Enter. Expect, in this order:
+Type `skills`. After a beat the list shows the SkillsBench preprint with its authors and year and a "Zotero" badge. Press Enter. Expect, in this order:
 
 - the sentence now ends with the chip `[@li2026skillsbench]` (first author's surname, year, first title word);
 - `refs/refs.bib` exists at the vault root with one `@misc{li2026skillsbench,` entry and no `file =` line;
@@ -28,7 +28,7 @@ Type `skills`. After a beat the list shows the SkillsBench preprint with its aut
 
 ## 2. Vault first, no duplicates
 
-Press `cmd-alt-c` again with an empty query: the list starts with this vault's own entries (`hayashi2003`, `wong1987`, `okada2015`, `fourtreasures2024` from `md/references.bib`, plus whatever `refs/refs.bib` now holds), each marked "in vault as @key". Type `skills` again: the paper appears once, as the vault entry, not a second time from Zotero. Esc closes without inserting.
+Press `cmd-alt-c` again with an empty query: the list starts with this vault's own entries (`hayashi2003`, `wong1987`, `okada2015`, `fourtreasures2024` from `md/references.bib`, plus whatever `refs/refs.bib` now holds), each with a "Project" badge and its `@key`. Type `skills` again: the paper appears once, with the "Project" badge, not a second time from Zotero. Esc closes without inserting.
 
 Multi-select: open the picker, type `ink`, press `tab` on two entries, then Enter. Expect one group like `[@hayashi2003; @okada2015]`.
 
