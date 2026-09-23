@@ -32,7 +32,10 @@ Press `cmd-alt-c` again with an empty query: the list starts with this vault's o
 
 Multi-select: open the picker, type `ink`, press `tab` on two entries, then Enter. Expect one group like `[@hayashi2003; @okada2015]`.
 
-## 3. Hover card
+## 3. Hover card and styles
+
+Styles are hayagriva's bundled CSL archive, compiled into Suzuri and looked up by name from the frontmatter `csl:` key; there is no style file on disk and no custom `.csl` support yet. Names you are likely to want: `apa`, `ieee`, `chicago-author-date`, `chicago-notes`, `mla`, `harvard-cite-them-right`, `vancouver`, `nature`, `association-for-computing-machinery`, `springer-basic`, `elsevier-harvard`. Pandoc's spelling works too: `csl: styles/ieee.csl` resolves to `ieee`. A name that is not bundled (try `csl: apaa`) falls back to APA and the References block ends with a warning line naming it.
+
 
 Hover the chip from Section 1. The card is the reference in APA (`Li, X., Liu, Y., …`), then **In text:** `(Li et al., 2026)`, then the style name. Change the frontmatter above to `csl: ieee` and hover again: the reference is now numbered IEEE style. Change it back.
 
