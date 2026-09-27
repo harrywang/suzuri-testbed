@@ -22,3 +22,7 @@ latex/**/*.synctex.gz
 latex/**/missfont.log
 # the picker copies PDFs here; the library itself stays tracked
 refs/*.pdf
+
+# The screenshot vaults must be complete in a fresh clone.
+!screenshots/**/suzuri-banner.png
+screenshots/*/refs/*.pdf

@@ -1,0 +1,9 @@
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-alt-cmd-pageup": "typeset_preview::OpenLivePreview",
+      "ctrl-alt-cmd-pagedown": "agent::ToggleFocus"
+    }
+  }
+]
