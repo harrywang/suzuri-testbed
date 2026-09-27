@@ -73,7 +73,7 @@ It also exercises on-demand package installation: the template pulls in `newtx`,
 
 Unlike the rest of the testbed, these are not checks. They are the small, tidy vaults the [suzuri.ai](https://suzuri.ai) showcase screenshots are taken from, kept here so a retake after a UI change looks like the others.
 
-- `inkstone-notes/` — the Typst preview (`paper/ink-density.typ`) and Agents shots.
+- `inkstone-notes/` — the Typst preview (`paper/ink-density.typ`) and Agents shots. `analysis/density_fit.py` fits the paper's curve to `samples.csv` and gives the agent a Python file to work beside; the 2026-09 Agents shot asked Claude Agent for an ink-diffusion simulation.
 - `suzuri-notes/` — the Zotero, Mermaid, and Jupyter shots. `analysis/pilot.ipynb` is saved executed, so its chart shows before any kernel runs; its data is simulated and the notebook says so.
 
 `open.sh <vault> [file ...]` copies a vault to `/tmp/suzuri-shots`, makes the copy its own git repo (so the title bar reads the vault's name, and autosave never dirties the fixtures), gives it a `.venv` with `ipykernel` if it holds a notebook, and opens it in an isolated Suzuri at 1430×825 pt using `config/`. It prints the app's pid. `capture.sh <pid> <out.png>` then saves the window alone, without shadow, at 2000 px wide, which is how the site's images are framed.
