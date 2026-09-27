@@ -12,6 +12,7 @@ code/     Python REPL and notebook execution
 latex/    LaTeX preview
 typst/    Typst preview
 pdf/      PDF viewer
+screenshots/  the vaults suzuri.ai's screenshots are taken from
 ```
 
 ## md/ — markdown live preview
@@ -67,3 +68,27 @@ It also exercises on-demand package installation: the template pulls in `newtx`,
 ## pdf/ — PDF viewer
 
 `tanaka-2019.pdf` — the (fictional) paper the markdown notes cite, doing double duty as the PDF-viewer fixture.
+
+## screenshots/ — suzuri.ai screenshots
+
+Unlike the rest of the testbed, these are not checks. They are the small, tidy vaults the [suzuri.ai](https://suzuri.ai) showcase screenshots are taken from, kept here so a retake after a UI change looks like the others.
+
+- `inkstone-notes/` — the Typst preview (`paper/ink-density.typ`) and Agents shots.
+- `suzuri-notes/` — the Zotero, Mermaid, and Jupyter shots. `analysis/pilot.ipynb` is saved executed, so its chart shows before any kernel runs; its data is simulated and the notebook says so.
+
+`open.sh <vault> [file ...]` copies a vault to `/tmp/suzuri-shots`, makes the copy its own git repo (so the title bar reads the vault's name, and autosave never dirties the fixtures), gives it a `.venv` with `ipykernel` if it holds a notebook, and opens it in an isolated Suzuri at 1430×825 pt using `config/`. It prints the app's pid. `capture.sh <pid> <out.png>` then saves the window alone, without shadow, at 2000 px wide, which is how the site's images are framed.
+
+```sh
+pid=$(screenshots/open.sh inkstone-notes notes/grinding-the-ink.md paper/ink-density.typ)
+cliclick c:175,348                              # select ink-density.typ in the project panel
+screenshots/tools/chord.sh $pid page-up         # typeset_preview::OpenLivePreview
+screenshots/capture.sh $pid typeset.png
+```
+
+`config/keymap.json` binds `ctrl-alt-cmd-pageup` to the Typst/LaTeX preview and `ctrl-alt-cmd-pagedown` to the agent panel; `tools/chord.sh` presses them after checking the window has focus. Clicking the file in the project panel is the reliable way to choose the active tab, since the order tabs open in varies between runs. The window opens at (60, 60), so panel rows sit at fixed screen positions.
+
+Things that have gone wrong before:
+
+- **Keep plots narrower than the pane.** A notebook image wider than the pane is scaled down to fit, and the code cell above it shrinks to about half size with it. The retina `figure_format` does the same.
+- **The site crops to 2:1 from the top.** A capture is 2000×1154, so its bottom 154 px disappear unless the showcase entry sets its own `aspect`. Check what sits in that band.
+- **The Agents shot needs a live agent turn.** It depends on your own login, so its settings stay out of `config/`: put a full settings file with your `agent_servers` block at `/tmp/suzuri-shots/data-<vault>/config/settings.local.json`, and `open.sh` uses it instead. The data dir is kept between runs for the same reason, and because the typst-extension offer can only be dismissed in the app, not turned off in settings.

@@ -1,0 +1,19 @@
+{
+  "file_scan_exclusions": ["**/.git", "**/.DS_Store", "**/.gitignore"],
+  "project_panel": { "dock": "left" },
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "light",
+    "light": "Suzuri Light",
+    "dark": "Suzuri Dark"
+  },
+  "restore_on_startup": "none",
+  "enable_language_server": false,
+  "git": {
+    "inline_blame": { "enabled": false }
+  },
+  "session": {
+    "trust_all_worktrees": true
+  }
+}
