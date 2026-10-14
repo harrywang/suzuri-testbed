@@ -6,6 +6,7 @@ Two table bugs were fixed on 2026-08-20. Open this note in live preview — with
 - [ ] Section 2 keeps long text inside its own column
 - [ ] Section 3 draws one clean grid — every cell in a row is the same height
 - [ ] Section 4 shows wikilinks without their brackets
+- [ ] Section 5 typesets `$...$` math in cells, on the baseline of the text beside it
 
 ## 1. Line breaks inside a cell
 
@@ -61,3 +62,26 @@ Wikilinks are concealed on the buffer text, but a cell is drawn from extracted t
 | two in one cell | [[duan-ratios]] and [[reading-list]] |
 
 These are display-only — clicking one does not navigate yet.
+
+## 5. Math inside cells
+
+Covers [suzuri#127](https://github.com/harrywang/suzuri/pull/127) and [suzuri#128](https://github.com/harrywang/suzuri/pull/128). Like wikilinks, a cell is drawn by the markdown renderer, which drops math, so `$x_1^{(i)}$` used to reach the screen as raw LaTeX. Cells now typeset their formulas and keep the text around them as Markdown.
+
+**Broken:** the header row shows `$x_1^{(i)}$ (population)`, dollar signs and all.
+**Fixed:** every formula is typeset. A formula and the label after it share one line, and the label's letters sit on the formula's baseline rather than being centered against it.
+
+| $i$ | $x_1^{(i)}$ (population) | $x_2^{(i)}$ (median income) | $x_3^{(i)}$ (age) | $y^{(i)}$ |
+| --- | --- | --- | --- | --- |
+| 1 | 322 | 8.3252 | 41 | 452600 |
+| 2 | 2401 | 8.3014 | 21 | 358500 |
+
+The near-misses must stay text, as they do outside tables:
+
+| form | renders as |
+| --- | --- |
+| inline | $\hat{y} = \mathbf{w}^\top \mathbf{x}$ |
+| mid-cell `$$` | the ratio $$\frac{w}{s}$$ inline |
+| code span, left raw | `$x$` |
+| escaped dollars | \$5 and \$10 |
+| loose delimiters | $ a = b $ |
+| broken LaTeX, shown as source | $\frac{3}{$ |

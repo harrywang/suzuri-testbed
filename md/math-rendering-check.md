@@ -10,6 +10,7 @@ Inline and display LaTeX landed on 2026-08-20. Open this note in live preview â€
 - [ ] Section 6 renders mid-line `$$` inline, not as a block
 - [ ] Section 7 shows broken LaTeX as source, never as a blank
 - [ ] Section 8 reads naturally as a real note
+- [ ] Section 9 grows a line to fit tall inline math instead of overlapping its neighbors
 
 ## 1. Inline math and the baseline
 
@@ -82,3 +83,18 @@ Grinding transfers pigment at a rate proportional to pressure $p$ and inversely 
 $$t^* = \frac{g\, c^* V}{\alpha p} \approx 4 \text{ minutes}$$
 
 of slow circular work â€” matching what [[inkstone-care]] says the hand learns anyway.
+
+## 9. Tall inline math grows its line
+
+Covers [suzuri#126](https://github.com/harrywang/suzuri/pull/126). A single-`$` formula taller than a line, here a column of partial derivatives, used to be drawn at full height inside a fixed-height row and painted over the lines above and below. Its row now grows to fit, and the formula keeps its baseline on the text's.
+
+The line before the formula.
+
+$\nabla_{\mathbf{w}}MSE(\mathbf{w})=\begin{bmatrix} \frac{\partial}{\partial b}MSE(\mathbf{w})\\ \frac{\partial}{\partial w_1}MSE(\mathbf{w})\\ \vdots \\ \frac{\partial}{\partial w_d}MSE(\mathbf{w}) \end{bmatrix}= \frac{2}{n}\mathbf{X}^\top(\mathbf{X}\mathbf{w} - \mathbf{y})$
+
+Mid-sentence, the gradient $\nabla_{\mathbf{w}}MSE(\mathbf{w})$ is a column $\begin{bmatrix} a \\ b \\ c \end{bmatrix}$ recomputed at every step, and the words on either side stay on its baseline.
+
+The line after the formula. A short formula like $E = mc^2$ keeps the normal line height.
+
+**Broken:** the matrix overlaps "The line before the formula" and the paragraph below it.
+**Fixed:** each row holding a matrix is as tall as the matrix and nothing overlaps. Putting the cursor in a formula shows its LaTeX on a normal-height line.
