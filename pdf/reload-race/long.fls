@@ -1,0 +1,33 @@
+PWD /Users/harrywang/sandbox/suzuri-testbed/pdf/reload-race
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf.cnf
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/web2c/texmf.cnf
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT long.tex
+OUTPUT long.log
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/base/article.cls
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/base/article.cls
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/base/size12.clo
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/base/size12.clo
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/base/size12.clo
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+INPUT ./long.aux
+INPUT ./long.aux
+INPUT long.aux
+OUTPUT long.aux
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmr17.tfm
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+OUTPUT long.pdf
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT long.aux
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT /Users/harrywang/Library/Application Support/Zed/typeset_compilers/tinytex-v2026.08/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
