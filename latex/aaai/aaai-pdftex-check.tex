@@ -40,8 +40,48 @@
 A minimal document in the AAAI 2027 submission format. The content
 mirrors \texttt{latex-rendering-check.tex}: ink density saturates as a
 function of grind time, and the stone --- not the stick --- sets the
-ceiling.
+ceiling. We formalize the saturation dynamics as a first-order process,
+report fitted parameters for three historically significant stones, and
+argue that the grinding surface, rather than the ink stick, determines
+both the rate of saturation and the achievable ceiling. The document
+doubles as a rendering check: it exercises the running head, numbered
+equations, booktabs tables, and natbib citations under the AAAI class.
 \end{abstract}
+
+\section{Introduction}
+
+The preparation of liquid ink from a solid ink stick is one of the
+oldest continuously practiced material processes in East Asian
+scholarship. A stick of compressed soot and animal glue is ground
+against a wetted stone until the resulting suspension reaches a working
+density. Practitioners have long claimed that the choice of stone
+matters more than the choice of stick, a claim recorded as early as the
+classical treatises surveyed by \citet{mizuta1968}. Yet the claim was
+largely anecdotal until modern densitometry made it testable.
+
+This note formalizes the folk claim as a parameter-identification
+problem. We model grinding as a first-order saturating process, fit its
+two parameters to published measurements, and compare stones from the
+two most celebrated quarry traditions: Duan and She. Our contribution
+is deliberately modest --- a clean restatement of known results in a
+form suitable for quantitative comparison --- but the framing clarifies
+which physical properties of a stone are load-bearing and which are
+cosmetic.
+
+\section{Related Work}
+
+The empirical study of inkstone performance is small but well
+documented. \citet{tanaka2019} established the saturating-exponential
+form used here by grinding standardized pine-soot sticks on
+instrumented stones and sampling optical density at fixed intervals.
+Their measurements cover the Laokeng and Majiakeng quarries of the Duan
+tradition alongside She stones from Longwei mountain.
+\citet{chen2021} approach the same materials from the provenance side,
+surveying spectroscopic and petrographic methods for attributing a
+stone to a quarry; their taxonomy of surface microstructure informs the
+discussion in the final section. The broader cultural context of the
+scholar's four treasures --- stone, stick, brush, and paper --- is
+treated at length by \citet{mizuta1968}.
 
 \section{Model}
 
@@ -53,6 +93,27 @@ follows a saturating exponential,
 \end{equation}
 where $\tau$ is the stone's time constant and $D_{\max}$ its ceiling.
 The relationship was established empirically by \citet{tanaka2019}.
+
+Two properties of Equation~\ref{eq:density} deserve emphasis. First,
+the model has no parameter describing the ink stick: within the range
+of sticks tested, stick composition shifts neither $\tau$ nor
+$D_{\max}$ beyond measurement error. Second, the two parameters are
+identifiable from a short grinding session, since
+\begin{equation}
+  \label{eq:rate}
+  \frac{dD}{dt}\Big|_{t=0} = \frac{D_{\max}}{\tau}
+\end{equation}
+gives the initial slope and any two well-separated samples then pin
+both values. In practice a calligrapher senses Equation~\ref{eq:rate}
+directly: a fast stone announces itself within the first minute.
+
+The physical interpretation is straightforward. The stone's surface
+carries microscopic abrasive structure --- the ``forge'' patterns of
+the quarry --- which shears particles off the stick and disperses them
+into the water. A finer, denser structure shears smaller particles at
+a higher rate, raising $D_{\max}$ (smaller particles scatter less
+light per unit mass of soot) and lowering $\tau$ (more contact points
+per stroke).
 
 \section{Results}
 
@@ -74,11 +135,72 @@ She             & 9.2 & 0.81 \\
 \label{tab:stones}
 \end{table}
 
+The ordering is consistent across both parameters: the stone that
+saturates fastest also reaches the highest ceiling. This coupling is
+what Equation~\ref{eq:density} predicts if a single latent property ---
+abrasive fineness --- drives both effects. A Laokeng Duan stone
+reaches 90\% of its ceiling in under ten minutes of grinding; the She
+stone requires more than twenty minutes to reach 90\% of a lower
+ceiling. For a working calligrapher the practical gap is larger than
+the numbers suggest, because sessions are bounded by patience rather
+than by asymptotics.
+
+It is worth stressing what the table does \emph{not} show. It does not
+rank the stones aesthetically: She stones are prized for their
+eyebrow-streak figuring, and \citet{chen2021} note that provenance and
+market value track visual features far more closely than they track
+grinding performance. Nor does it capture durability, water retention,
+or the feel of the stroke, all of which enter a practitioner's choice.
+
+\section{Discussion}
+
+The folk claim survives quantification: the stone sets the ceiling.
+Two caveats bound the result. First, the measurements of
+\citet{tanaka2019} used standardized sticks; exotic formulations
+(lacquer-smoke soot, oil-soot blends) might yet interact with surface
+structure in ways the model excludes. Second, $D_{\max}$ is an optical
+ceiling, not a chemical one --- prolonged grinding past saturation
+changes particle-size distribution without changing measured density,
+which may matter for brush behavior even where it does not matter for
+densitometry.
+
+The identification argument in Equation~\ref{eq:rate} suggests a cheap
+field protocol for stone assessment: a one-minute grind and two
+density samples suffice to place a stone on the
+$(\tau, D_{\max})$ plane. We leave a validation of that protocol
+against the provenance methods of \citet{chen2021} to future work.
+
+\section{Limitations}
+
+Beyond the caveats above, the dataset itself is narrow: three stones,
+one per quarry tradition, each measured with a single stick formulation
+and a fixed water volume. Within-quarry variance is unreported, and
+Duan quarries in particular are known to yield stones of widely varying
+grade from the same seam. Temperature and humidity, both of which
+affect glue dissolution, were controlled in the laboratory but vary
+substantially in real studios. The model also treats grinding pressure
+and stroke rate as constant, whereas practitioners modulate both over a
+session; a richer model would let $\tau$ depend on applied work rather
+than on wall-clock time.
+
+\section{Conclusion}
+
+We restated a centuries-old craft claim as a two-parameter estimation
+problem and found that the data support it: the stone, not the stick,
+sets both the speed and the ceiling of ink saturation. The
+saturating-exponential form of Equation~\ref{eq:density} fits all three
+stones tested, the fitted parameters order the stones consistently, and
+the coupling between $\tau$ and $D_{\max}$ points to a single latent
+driver in the surface microstructure. The practical upshot for a
+working calligrapher is simple, and it is the same advice the classical
+treatises give: invest in the stone.
+
 \section{Checklist}
 
 Opening this file and pressing preview should produce a two-column PDF
 with the AAAI running head, a numbered equation, a booktabs table, and a
-resolved citation to \citet{tanaka2019} in the references.
+resolved citation to \citet{tanaka2019} in the references. The document
+should now run exactly two pages.
 
 % aaai2027.sty sets the bibliographystyle itself; declaring it again makes
 % bibtex fail with "Illegal, another \bibstyle command".
