@@ -1,12 +1,14 @@
 # Table rendering check
 
-Two table bugs were fixed on 2026-08-20. Open this note in live preview — with the cursor parked somewhere else, so the tables stay rendered — and check each section against what it says it should look like. Linked from [[grinding-the-ink]].
+Two table bugs were fixed on 2026-08-20, and two layout bugs on 2026-08-31. Open this note in live preview — with the cursor parked somewhere else, so the tables stay rendered — and check each section against what it says it should look like. Linked from [[grinding-the-ink]].
 
 - [ ] Section 1 renders `<br>` as a line break
 - [ ] Section 2 keeps long text inside its own column
 - [ ] Section 3 draws one clean grid — every cell in a row is the same height
 - [ ] Section 4 shows wikilinks without their brackets
-- [ ] Section 5 typesets `$...$` math in cells, on the baseline of the text beside it
+- [ ] Section 5 sizes columns to their content — no table stretched across the pane
+- [ ] Section 6 scrolls a wide table horizontally in place
+- [ ] Section 7 typesets `$...$` math in cells, on the baseline of the text beside it
 
 ## 1. Line breaks inside a cell
 
@@ -63,7 +65,33 @@ Wikilinks are concealed on the buffer text, but a cell is drawn from extracted t
 
 These are display-only — clicking one does not navigate yet.
 
-## 5. Math inside cells
+## 5. Columns take their content width
+
+Tables used to stretch to the full block width, with the leftover space split equally across columns — so a rank column with a single digit in it grew as wide as a column of sentences, and the whole table sprawled across the pane. Columns are now sized from their content, and the table hugs the grid.
+
+**Broken:** the table below spans the whole pane, with acres of blank space after `1` and `4.8`.
+**Fixed:** the table is a compact block on the left; the `rank` and `grade` columns are narrow, the `stone` column a little wider, and nothing stretches.
+
+| rank | stone | grade |
+| --- | --- | --- |
+| 1 | Duan | 4.8 |
+| 2 | She | 4.5 |
+| 3 | Tao | 4.2 |
+
+## 6. Wide tables scroll in place
+
+A table wider than the pane used to be simply cut off: the hidden columns were unreachable, because the replaced source lines never extend the editor's own scroll range. The grid now lives in its own horizontal scroll region, capped at the visible pane width.
+
+**Broken:** the columns past the right edge cannot be reached at all.
+**Fixed:** the table stops at the pane edge; a trackpad swipe (or shift+wheel) over it slides the grid to reveal `water ratio` through `notes`, while the rest of the note stays put. The `</>` and `+` buttons stay pinned at the right edge while the grid scrolls.
+
+| stone | provenance | quarried | water ratio | grind angle | slurry time | resting | notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Duan** (端硯) | Lower rock of the Meikeng pit, purple-brown with banded eyes throughout the face | 1782 | three parts water to five parts stone | shallow, almost flat to the face | slow to raise, holds a stroke well | dry on cloth, never in the well | the reference stone for [[duan-ratios]] |
+| **She** (歙硯) | Gold-thread stripe from Wuyuan, fine-grained and cold to the touch in winter | undated | four parts water to five parts stone | slightly steeper than Duan | very slow, fine slurry | rinse and stand on edge | compare against [[grinding-the-ink]] |
+| **Tao** (洮硯) | Green Tao river stone, rippled like the current that carried it | 1911 | equal parts | shallow | quick but coarse | dry flat | rarely used, kept for guests |
+
+## 7. Math inside cells
 
 Covers [suzuri#127](https://github.com/harrywang/suzuri/pull/127) and [suzuri#128](https://github.com/harrywang/suzuri/pull/128). Like wikilinks, a cell is drawn by the markdown renderer, which drops math, so `$x_1^{(i)}$` used to reach the screen as raw LaTeX. Cells now typeset their formulas and keep the text around them as Markdown.
 
