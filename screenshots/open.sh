@@ -38,7 +38,9 @@ fi
 
 # Reuse compilers the installed app already downloaded, so a Typst or LaTeX
 # preview does not start with a provisioning toast.
-installed_data="$HOME/Library/Application Support/Zed"
+# Suzuri shared Zed's folder until 0.5.8.
+installed_data="$HOME/Library/Application Support/Suzuri"
+[[ -d "$installed_data/typeset_compilers" ]] || installed_data="$HOME/Library/Application Support/Zed"
 if [[ -d "$installed_data/typeset_compilers" && ! -d $data/typeset_compilers ]]; then
   cp -R "$installed_data/typeset_compilers" $data/
 fi
