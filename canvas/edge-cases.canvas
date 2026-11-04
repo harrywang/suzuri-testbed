@@ -1,0 +1,15 @@
+{
+	"nodes": [
+		{"id": "kept", "type": "text", "x": 0, "y": 0, "width": 320, "height": 140, "text": "**Kept.** This node carries an extra `plugin` field, which is ignored.", "plugin": {"by": "someone-else"}},
+		{"id": "no-position", "type": "text", "text": "This node has no x, y, width or height, so it is skipped. You must NOT see this text."},
+		{"id": "bad-color", "type": "text", "x": 380, "y": 0, "width": 320, "height": 140, "color": "9", "text": "Color \"9\" is not a preset: plain border, no tint."},
+		{"id": "empty-text", "type": "text", "x": 0, "y": 200, "width": 320, "height": 140},
+		{"id": "float", "type": "text", "x": 380.5, "y": 200.25, "width": 320.75, "height": 140, "text": "Fractional coordinates still place this card."}
+	],
+	"edges": [
+		{"id": "ok", "fromNode": "kept", "toNode": "bad-color", "label": "the only edge"},
+		{"id": "dangling", "fromNode": "kept", "toNode": "no-position", "label": "must NOT be drawn"},
+		{"id": "half", "fromNode": "kept"}
+	],
+	"metadata": {"version": "1.0-extension"}
+}

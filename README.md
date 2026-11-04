@@ -12,6 +12,7 @@ code/     Python REPL and notebook execution
 latex/    LaTeX preview
 typst/    Typst preview
 pdf/      PDF viewer
+canvas/   JSON Canvas viewer
 screenshots/  the vaults suzuri.ai's screenshots are taken from
 ```
 
@@ -65,6 +66,15 @@ Two things about the source are load-bearing and easy to "fix" into breakage: th
 It also exercises on-demand package installation: the template pulls in `newtx`, `caption`, `courier`, and `tex-gyre`, among others, which a minimal TeX Live will not have until something fetches them.
 
 `latex/neurips/` is the other half of that pair. NeurIPS pins no engine, so it builds under pdfTeX, XeTeX, or LuaTeX alike — what it covers instead is a different package set (`lineno`, `environ`, `units`, `microtype`) and a visibly different page. Left in submission mode, `neurips-rendering-check.tex` anonymises the authors and prints line numbers down the left margin, so a preview that silently loses `lineno` is obvious at a glance rather than only in a log. Adding a `preprint` or `final` option to the `\usepackage` line switches both off, which is a quick way to check the template still responds to its options.
+
+## canvas/ — JSON Canvas viewer
+
+- `canvas-rendering-check.md` is the checklist for the read-only `.canvas` viewer. It walks the canvases beside it section by section.
+- `canvas-rendering-check.canvas` is the feature map: colored and uncolored groups, note cards (a whole note, a `#heading` subpath, a note with frontmatter, a missing file), an image and a PDF card, a hex-colored card, web and `file://` links, a markdown text card, a card of unknown type, and edges covering explicit and inferred sides, each arrow-end combination, preset and hex colors, and labels. Its `file` paths are relative to the testbed root, so open the root.
+- `edge-cases.canvas` holds what the viewer must tolerate rather than reject: extra fields, a node with no position, a color that is not a preset, an empty text card, fractional coordinates, and edges to missing nodes.
+- `empty.canvas` is a zero-byte file, which is how a new canvas looks before anything writes to it.
+- `live-reload/agent-writes.canvas` starts empty, and `live-reload/simulate-agent.py` rewrites it step by step the way an agent would, including a write cut off halfway. Its `reset` step empties the file again so git stays clean.
+- `notes/frontmatter-note.md` exists so a note card can be checked for leaking frontmatter.
 
 ## pdf/ — PDF viewer
 

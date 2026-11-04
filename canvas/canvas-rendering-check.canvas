@@ -1,0 +1,274 @@
+{
+	"nodes": [
+		{
+			"id": "g-notes",
+			"type": "group",
+			"x": -40,
+			"y": -80,
+			"width": 1100,
+			"height": 560,
+			"label": "1. Notes (green group)",
+			"color": "4"
+		},
+		{
+			"id": "g-files",
+			"type": "group",
+			"x": 1140,
+			"y": -80,
+			"width": 760,
+			"height": 560,
+			"label": "2. Files (purple group)",
+			"color": "6"
+		},
+		{
+			"id": "g-links",
+			"type": "group",
+			"x": -40,
+			"y": 560,
+			"width": 1100,
+			"height": 360,
+			"label": "3. Links and text (no color)"
+		},
+		{
+			"id": "g-edges",
+			"type": "group",
+			"x": 1140,
+			"y": 560,
+			"width": 760,
+			"height": 900,
+			"label": "4. Edges (red group)",
+			"color": "1"
+		},
+		{
+			"id": "note-whole",
+			"type": "file",
+			"x": 0,
+			"y": 0,
+			"width": 480,
+			"height": 200,
+			"file": "md/inkstone-care.md"
+		},
+		{
+			"id": "note-section",
+			"type": "file",
+			"x": 540,
+			"y": 0,
+			"width": 480,
+			"height": 200,
+			"file": "md/inkstone-care.md",
+			"subpath": "#Deep clean",
+			"color": "5"
+		},
+		{
+			"id": "note-frontmatter",
+			"type": "file",
+			"x": 0,
+			"y": 250,
+			"width": 480,
+			"height": 200,
+			"file": "canvas/notes/frontmatter-note.md"
+		},
+		{
+			"id": "note-missing",
+			"type": "file",
+			"x": 540,
+			"y": 250,
+			"width": 480,
+			"height": 200,
+			"file": "md/this-note-does-not-exist.md",
+			"color": "2"
+		},
+		{
+			"id": "image",
+			"type": "file",
+			"x": 1180,
+			"y": 0,
+			"width": 340,
+			"height": 200,
+			"file": "md/attachments/suzuri-banner.png"
+		},
+		{
+			"id": "pdf",
+			"type": "file",
+			"x": 1560,
+			"y": 0,
+			"width": 300,
+			"height": 200,
+			"file": "pdf/tanaka-2019.pdf"
+		},
+		{
+			"id": "hex",
+			"type": "text",
+			"x": 1180,
+			"y": 250,
+			"width": 680,
+			"height": 200,
+			"color": "#c0472b",
+			"text": "**Hex color card.** Border and tint are vermilion `#c0472b`, not one of the six presets."
+		},
+		{
+			"id": "link-web",
+			"type": "link",
+			"x": 0,
+			"y": 620,
+			"width": 340,
+			"height": 120,
+			"url": "https://jsoncanvas.org/spec/1.0/"
+		},
+		{
+			"id": "link-file",
+			"type": "link",
+			"x": 0,
+			"y": 770,
+			"width": 340,
+			"height": 120,
+			"url": "file:///System/Applications/Calculator.app"
+		},
+		{
+			"id": "text-md",
+			"type": "text",
+			"x": 380,
+			"y": 620,
+			"width": 640,
+			"height": 270,
+			"color": "3",
+			"text": "## Text card (yellow)\n\nMarkdown renders: **bold**, *italic*, `inline code`, and a [link](https://example.com) that does **not** open on click.\n\n- a bullet\n- another\n\n> a block quote"
+		},
+		{
+			"id": "e-a",
+			"type": "text",
+			"x": 1180,
+			"y": 620,
+			"width": 200,
+			"height": 100,
+			"text": "A"
+		},
+		{
+			"id": "e-b",
+			"type": "text",
+			"x": 1660,
+			"y": 620,
+			"width": 200,
+			"height": 100,
+			"text": "B"
+		},
+		{
+			"id": "e-c",
+			"type": "text",
+			"x": 1180,
+			"y": 820,
+			"width": 200,
+			"height": 100,
+			"text": "C"
+		},
+		{
+			"id": "e-d",
+			"type": "text",
+			"x": 1660,
+			"y": 820,
+			"width": 200,
+			"height": 100,
+			"text": "D"
+		},
+		{
+			"id": "e-e",
+			"type": "text",
+			"x": 1180,
+			"y": 1020,
+			"width": 200,
+			"height": 100,
+			"text": "E"
+		},
+		{
+			"id": "e-f",
+			"type": "text",
+			"x": 1660,
+			"y": 1020,
+			"width": 200,
+			"height": 100,
+			"text": "F"
+		},
+		{
+			"id": "e-g",
+			"type": "text",
+			"x": 1420,
+			"y": 1250,
+			"width": 200,
+			"height": 100,
+			"text": "G"
+		},
+		{
+			"id": "unknown",
+			"type": "sticker",
+			"x": 1180,
+			"y": 1250,
+			"width": 200,
+			"height": 100
+		}
+	],
+	"edges": [
+		{
+			"id": "whole-section",
+			"fromNode": "note-whole",
+			"fromSide": "right",
+			"toNode": "note-section",
+			"toSide": "left",
+			"label": "sides given"
+		},
+		{
+			"id": "whole-frontmatter",
+			"fromNode": "note-whole",
+			"toNode": "note-frontmatter",
+			"label": "sides inferred"
+		},
+		{
+			"id": "ab",
+			"fromNode": "e-a",
+			"fromSide": "right",
+			"toNode": "e-b",
+			"toSide": "left",
+			"label": "default: arrow at B only"
+		},
+		{
+			"id": "cd",
+			"fromNode": "e-c",
+			"fromSide": "right",
+			"toNode": "e-d",
+			"toSide": "left",
+			"fromEnd": "arrow",
+			"toEnd": "arrow",
+			"label": "arrows both ends",
+			"color": "5"
+		},
+		{
+			"id": "ef",
+			"fromNode": "e-e",
+			"fromSide": "right",
+			"toNode": "e-f",
+			"toSide": "left",
+			"toEnd": "none",
+			"label": "no arrows",
+			"color": "#c0472b"
+		},
+		{
+			"id": "ac",
+			"fromNode": "e-a",
+			"fromSide": "bottom",
+			"toNode": "e-c",
+			"toSide": "top",
+			"color": "3"
+		},
+		{
+			"id": "fg",
+			"fromNode": "e-f",
+			"toNode": "e-g",
+			"label": "inferred"
+		},
+		{
+			"id": "text-image",
+			"fromNode": "text-md",
+			"toNode": "image",
+			"color": "6"
+		}
+	]
+}
