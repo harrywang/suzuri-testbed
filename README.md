@@ -13,6 +13,7 @@ latex/    LaTeX preview
 typst/    Typst preview
 pdf/      PDF viewer
 canvas/   JSON Canvas viewer
+graph/    local graph of linked notes
 screenshots/  the vaults suzuri.ai's screenshots are taken from
 ```
 
@@ -75,6 +76,14 @@ It also exercises on-demand package installation: the template pulls in `newtx`,
 - `empty.canvas` is a zero-byte file, which is how a new canvas looks before anything writes to it.
 - `live-reload/agent-writes.canvas` starts empty, and `live-reload/simulate-agent.py` rewrites it step by step the way an agent would, including a write cut off halfway. Its `reset` step empties the file again so git stays clean.
 - `notes/frontmatter-note.md` exists so a note card can be checked for leaking frontmatter.
+
+## graph/ — local graph
+
+- `local-graph-check.md` is the checklist for the local graph ([suzuri#166](https://github.com/harrywang/suzuri/pull/166)): the pane that shows the active note with the notes linked to and from it. It names the fixtures in code spans, never as links, so it stays out of their graphs.
+- `centre.md` is where the check starts. It links out once in each shape the graph counts (a wikilink, an alias, a heading link, an embed, a markdown link) and once in each shape it must ignore (a missing note, a web link, a heading in the same note, a code span, a fenced block, frontmatter). Its graph has exactly six neighbours, so a seventh or a fifth is a regression.
+- `backlink.md` links to the centre without being linked from it, `second-hop.md` and `third-hop.md` sit two and three links out for the depth buttons, and `only-in-code.md` is the note that must never appear.
+- `twin.md` and `elsewhere/twin.md` share a name. `[[twin]]` in the centre must resolve to the one beside it, the same note a click on the link in the editor opens.
+- `hub/` is one note with sixty others linking to it, for the crowded layout. The `md/` vault is the realistic case: `md/grinding-the-ink.md` has a dozen neighbours that also link to each other.
 
 ## pdf/ — PDF viewer
 
