@@ -1,14 +1,15 @@
 # Table rendering check
 
-Two table bugs were fixed on 2026-08-20, and two layout bugs on 2026-08-31. Open this note in live preview — with the cursor parked somewhere else, so the tables stay rendered — and check each section against what it says it should look like. Linked from [[grinding-the-ink]].
+Two table bugs were fixed on 2026-08-20, two layout bugs on 2026-08-31, and column fitting on 2026-11-17. Open this note in live preview — with the cursor parked somewhere else, so the tables stay rendered — and check each section against what it says it should look like. Linked from [[grinding-the-ink]].
 
 - [ ] Section 1 renders `<br>` as a line break
 - [ ] Section 2 keeps long text inside its own column
 - [ ] Section 3 draws one clean grid — every cell in a row is the same height
 - [ ] Section 4 shows wikilinks without their brackets
 - [ ] Section 5 sizes columns to their content — no table stretched across the pane
-- [ ] Section 6 scrolls a wide table horizontally in place
+- [ ] Section 6 scrolls a table of unbreakable cells horizontally in place
 - [ ] Section 7 typesets `$...$` math in cells, on the baseline of the text beside it
+- [ ] Section 8 wraps every column of a table wider than the pane, so it fits without scrolling
 
 ## 1. Line breaks inside a cell
 
@@ -82,14 +83,15 @@ Tables used to stretch to the full block width, with the leftover space split eq
 
 A table wider than the pane used to be simply cut off: the hidden columns were unreachable, because the replaced source lines never extend the editor's own scroll range. The grid now lives in its own horizontal scroll region, capped at the visible pane width.
 
-**Broken:** the columns past the right edge cannot be reached at all.
-**Fixed:** the table stops at the pane edge; a trackpad swipe (or shift+wheel) over it slides the grid to reveal `water ratio` through `notes`, while the rest of the note stays put. The `</>` and `+` buttons stay pinned at the right edge while the grid scrolls.
+Since section 8's fix, a table only scrolls when wrapping cannot make it fit, which is when its longest unbreakable words are together wider than the pane. The cells below are single tokens joined by underscores, which offer no place to break a line.
 
-| stone | provenance | quarried | water ratio | grind angle | slurry time | resting | notes |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| **Duan** (端硯) | Lower rock of the Meikeng pit, purple-brown with banded eyes throughout the face | 1782 | three parts water to five parts stone | shallow, almost flat to the face | slow to raise, holds a stroke well | dry on cloth, never in the well | the reference stone for [[duan-ratios]] |
-| **She** (歙硯) | Gold-thread stripe from Wuyuan, fine-grained and cold to the touch in winter | undated | four parts water to five parts stone | slightly steeper than Duan | very slow, fine slurry | rinse and stand on edge | compare against [[grinding-the-ink]] |
-| **Tao** (洮硯) | Green Tao river stone, rippled like the current that carried it | 1911 | equal parts | shallow | quick but coarse | dry flat | rarely used, kept for guests |
+**Broken:** the columns past the right edge cannot be reached at all, or a token is split in the middle to force the table into the pane.
+**Fixed:** the table stops at the pane edge with every token on one line; a trackpad swipe (or shift+wheel) over it slides the grid to reveal `resting_instruction` and `catalogue_note`, while the rest of the note stays put. The `</>` and `+` buttons stay pinned at the right edge while the grid scrolls.
+
+| stone_identifier | provenance_record | water_ratio_setting | grind_angle_setting | resting_instruction | catalogue_note |
+| --- | --- | --- | --- | --- | --- |
+| duan_lower_rock_meikeng_pit_1782 | zhaoqing_guangdong_purple_brown_banded_eyes | three_parts_water_to_five_parts_stone | shallow_almost_flat_to_the_face | dry_on_cloth_never_in_the_well | reference_stone_for_the_duan_ratios_note |
+| she_gold_thread_wuyuan_undated | wuyuan_jiangxi_fine_grained_cold_in_winter | four_parts_water_to_five_parts_stone | slightly_steeper_than_the_duan | rinse_and_stand_on_its_edge | compare_against_grinding_the_ink_note |
 
 ## 7. Math inside cells
 
@@ -113,3 +115,34 @@ The near-misses must stay text, as they do outside tables:
 | escaped dollars | \$5 and \$10 |
 | loose delimiters | $ a = b $ |
 | broken LaTeX, shown as source | $\frac{3}{$ |
+
+## 8. A table wider than the pane wraps every column
+
+Covers [suzuri#177](https://github.com/harrywang/suzuri/issues/177), fixed in [suzuri#178](https://github.com/harrywang/suzuri/pull/178). Each column was sized to its longest cell, up to a cap of 60 characters, and nothing shrank the columns when together they were wider than the pane. A column under the cap therefore never wrapped: only a column over it did, and the rest pushed the table into sideways scrolling. Columns now shrink the way a browser's do. Each keeps its longest word whole, and the width left over is shared by how much text a column holds.
+
+Check these in a pane about half the screen wide (split the editor, or open a dock), then drag the divider.
+
+**Broken:** in the first table the two left columns sit on one line each, only the right column wraps, and the table runs past the pane edge and scrolls sideways.
+**Fixed:** the table ends at the pane edge with nothing to scroll. All three columns wrap, and the right column, which holds the most text, is the widest. This is the reporter's table verbatim.
+
+| xxxxxxxx | xxxxxxx | xxxxxxx |
+| --- | --- | --- |
+| **xxxxxxxxxxxx xxxxxxxxx xxxxxxxxxxxx xxxxxxxxx** | ssssssssssssss sssssssssssssss ssssssssssssssssss. | xxxxxxxxx xxxxxxxxxx xxxxxxxxxx xxxxxxxxxxxxxxx (  $\delta_{\text{xxx}}$ xx xxxx par $y_{\text{xxx}}$) xxxxxxxxxx xxxxxxxxx xxxxxxxxxxxxxs. |
+| **ssssssssss xxxxxxxxxx yyyyyyyyy yyyyyy yyyyyyy** | ssssss xxxxxxxxxxx  cxxxxxxxx  xxxxxxxxxxxx. | xxxxxxxxxx s *xxxxxx* xxx  xxx xxxx xxxxxxxx  xxxx  xx  xxxxxxx  *xxxxx* (xxxxx de $\delta_{\text{xxxxx}}$ xx xxxxxxxxxx xxx $k_{\text{xxxxx}}$) xxxx xxxxxx xxxxxx xxxxx xx xxxxxx. |
+
+The same shape in prose. **Fixed:** the `year` column stays as narrow as its four digits, because a one-word column has nothing to give up, and the two text columns share the rest, `method` taking more than `stone`.
+
+| stone | method | year |
+| --- | --- | --- |
+| Lower rock of the Meikeng pit, purple-brown | Grind at a shallow angle with three parts water to five parts stone, adding water a few drops at a time until the slurry holds a stroke, then rest the stick dry on cloth | 1782 |
+| Gold-thread stripe from Wuyuan, cold in winter | Slightly steeper than the Duan, with four parts water to five parts stone, and a slow, fine slurry | 1911 |
+
+Text without spaces wraps between characters, so it must not count as one long word that pins its column. **Fixed:** all three columns wrap and the table fits the pane.
+
+| 硯 | 產地 | 研墨 |
+| --- | --- | --- |
+| 端硯出自廣東肇慶的老坑石質細膩溫潤紫中帶青石眼分明 | 歙硯出自江西婺源的龍尾山金星金暈紋理緻密發墨如油 | 研墨時水要一滴一滴地加墨錠與硯面保持平穩的角度慢慢畫圈直到墨汁濃淡合適為止 |
+
+Then resize. **Fixed:** as the pane narrows the columns narrow with it and the rows grow taller; as it widens they grow back only as far as their natural width, so the tables then sit on the left rather than stretching across the pane. Narrow the pane far enough and the first table starts to scroll, once its longest words no longer fit side by side.
+
+One limit is by design: a formula is measured by its source, so a cell with long LaTeX keeps its column wider than the typeset result needs.
