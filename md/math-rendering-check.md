@@ -11,6 +11,7 @@ Inline and display LaTeX landed on 2026-08-20. Open this note in live preview â€
 - [ ] Section 7 shows broken LaTeX as source, never as a blank
 - [ ] Section 8 reads naturally as a real note
 - [ ] Section 9 grows a line to fit tall inline math instead of overlapping its neighbors
+- [ ] Section 10 keeps a gap between stacked fractions and integrals in a list
 
 ## 1. Inline math and the baseline
 
@@ -98,3 +99,19 @@ The line after the formula. A short formula like $E = mc^2$ keeps the normal lin
 
 **Broken:** the matrix overlaps "The line before the formula" and the paragraph below it.
 **Fixed:** each row holding a matrix is as tall as the matrix and nothing overlaps. Putting the cursor in a formula shows its LaTeX on a normal-height line.
+
+## 10. Fractions in a list keep clear of each other
+
+Covers [suzuri#179](https://github.com/harrywang/suzuri/pull/179). An inline `\frac` is just under one line tall, so its row used to stay at the base height and the fraction ran edge to edge, touching the fraction on the next row. An integral with limits grew its row by a fraction of a pixel and touched too. Rows now keep a small clearance around inline math, so these grow like the Cov fraction in the last bullet always did. The full chapter this came from is in [[notation-math-spacing-check]]; its Calculus section is the reported case.
+
+* $\frac{dy}{dx}$: derivative of $y$ with respect to $x$
+* $\frac{\partial y}{\partial x}$: partial derivative of $y$ with respect to $x$
+* $\nabla_{\mathbf{x}} y$: gradient of $y$ with respect to $\mathbf{x}$
+* $\int_a^b f(x) \;dx$: definite integral of $f$ from $a$ to $b$ with respect to $x$
+* $\int f(x) \;dx$: indefinite integral of $f$ with respect to $x$
+* $\rho(X, Y)$: the Pearson correlation coefficient, equals $\frac{\textrm{Cov}(X, Y)}{\sigma_X \sigma_Y}$
+
+A paragraph with plain subscripts, the element $x_{ij}$ of $[\mathbf{X}]_{ij}$ and the variance $\sigma^2_X$ of $\textrm{Var}(X)$, wraps with the same line pitch as the prose around it.
+
+**Broken:** the two fractions touch each other, and the integral's limits touch the rows on either side.
+**Fixed:** a visible gap separates every formula from its neighbours, and the subscript paragraph's lines are evenly spaced.
