@@ -12,6 +12,7 @@ Inline and display LaTeX landed on 2026-08-20. Open this note in live preview â€
 - [ ] Section 8 reads naturally as a real note
 - [ ] Section 9 grows a line to fit tall inline math instead of overlapping its neighbors
 - [ ] Section 10 keeps a gap between stacked fractions and integrals in a list
+- [ ] Section 11 renders LLM-style `\(...\)` and `\[...\]` math, and leaves escaped brackets alone
 
 ## 1. Inline math and the baseline
 
@@ -115,3 +116,33 @@ A paragraph with plain subscripts, the element $x_{ij}$ of $[\mathbf{X}]_{ij}$ a
 
 **Broken:** the two fractions touch each other, and the integral's limits touch the rows on either side.
 **Fixed:** a visible gap separates every formula from its neighbours, and the subscript paragraph's lines are evenly spaced.
+
+## 11. LLM-style `\(...\)` and `\[...\]` delimiters
+
+Covers [suzuri#180](https://github.com/harrywang/suzuri/issues/180) and [suzuri#181](https://github.com/harrywang/suzuri/pull/181). ChatGPT and other LLMs write math with LaTeX's own delimiters, and those render like `$` and `$$`. In markdown, `\(` and `\[` are also plain escaped punctuation, so everything after the first block below is a near-miss that must stay text.
+
+The slurry thickens as \( \eta(t) = \eta_0 e^{\lambda t} \) predicts, and the tight form \(w/s = 3/5\) renders too.
+
+\[
+\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+\]
+
+\[ D(t) = D_{\max}\left(1 - e^{-t/\tau}\right) \]
+
+\[
+\begin{aligned}
+m(t) &= \frac{\alpha p t}{g} \\[2pt]
+t^* &= \frac{g\, c^* V}{\alpha p}
+\end{aligned}
+\]
+
+### Grinding at rate \(\alpha p / g\)
+
+Click into \( a*b*c + [x](y) \): the revealed source must read exactly as typed, with both asterisks and the link syntax visible, because nothing inside a formula is markdown.
+
+Near-misses, all plain text: the catalog cites the stone as \[1\] and \[citation needed\], an escaped backslash in a \\(path\\) is not a delimiter, `\(x\)` in a code span stays code, the [Duan article](https://en.wikipedia.org/wiki/Duan_\(inkstone\)) keeps its escaped URL parentheses, and an opener with no closer, \( like this, ends with its paragraph.
+
+A stray escape does not swallow later math: \(1) is a list label and \[x] a bracket, yet \(z^2\) at the end of this sentence still renders.
+
+**Broken:** a near-miss renders as a formula, the `\\[2pt]` line break ends the aligned block early, the heading shows raw `\(\alpha p / g\)`, or the last formula stays raw because of the stray escapes before it.
+**Fixed:** two inline formulas in the first paragraph, three centered display blocks, a typeset heading, the `\(z^2\)` at the end rendered, and every near-miss reading as typed (with the backslashes of escapes outside code shown as source). Exporting this note to HTML (Document â†’ Export) renders the same formulas as math and the near-misses as text.
