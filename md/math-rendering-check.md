@@ -13,6 +13,7 @@ Inline and display LaTeX landed on 2026-08-20. Open this note in live preview â€
 - [ ] Section 9 grows a line to fit tall inline math instead of overlapping its neighbors
 - [ ] Section 10 keeps a gap between stacked fractions and integrals in a list
 - [ ] Section 11 renders LLM-style `\(...\)` and `\[...\]` math, and leaves escaped brackets alone
+- [ ] Section 12 renders `\[...\]` with an `=` or `-` line as one formula, not a heading
 
 ## 1. Inline math and the baseline
 
@@ -146,3 +147,37 @@ A stray escape does not swallow later math: \(1) is a list label and \[x] a brac
 
 **Broken:** a near-miss renders as a formula, the `\\[2pt]` line break ends the aligned block early, the heading shows raw `\(\alpha p / g\)`, or the last formula stays raw because of the stray escapes before it.
 **Fixed:** two inline formulas in the first paragraph, three centered display blocks, a typeset heading, the `\(z^2\)` at the end rendered, and every near-miss reading as typed (with the backslashes of escapes outside code shown as source). Exporting this note to HTML (Document â†’ Export) renders the same formulas as math and the near-misses as text.
+
+## 12. Bracket display math with `=` lines
+
+Covers [suzuri#186](https://github.com/harrywang/suzuri/pull/186). In Markdown a line holding only `=` or `-` underlines the paragraph above it as a Setext heading, so an equation written one token per line, the way LLMs often write `\[...\]`, used to turn the sentence before it and the formula's top half into a heading and leave the closing `\]` stranded as text.
+
+The sentence right before the formula.
+\[
+x
+=
+y
+\]
+The sentence right after the formula.
+
+An aligned derivation with several `=` lines and a `-` line:
+
+\[
+a
+=
+b
+=
+c
+-
+d
+\]
+
+Near-misses that must not change. A real Setext heading stays a heading:
+
+A real Setext heading
+=
+
+Escaped brackets in prose, as in see \[1\], stay text.
+
+**Broken:** "The sentence right before the formula" renders as a big heading, and `\]` shows as literal text.
+**Fixed:** both sentences stay prose, the two formulas render as centered blocks reading `x = y` and `a = b = c - d`, "A real Setext heading" is still a heading, and `\[1\]` stays text.
