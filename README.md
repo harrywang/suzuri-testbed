@@ -89,6 +89,8 @@ It also exercises on-demand package installation: the template pulls in `newtx`,
 
 `tanaka-2019.pdf` — the (fictional) paper the markdown notes cite, doing double duty as the PDF-viewer fixture.
 
+`zoom-resize/pdf-zoom-resize-check.md` covers keeping your place in a long PDF: resizing the pane by toggling side panels ([suzuri#199](https://github.com/harrywang/suzuri/issues/199)), pinch to zoom around the pointer ([suzuri#200](https://github.com/harrywang/suzuri/issues/200)), Cmd+scroll zooming without also scrolling, and the zoom buttons and keys holding the line being read. Its `zoom-resize.pdf` is 30 Typst-built pages where every line names its page and line (`p12 · L17`), so where the view lands after each step is readable at a glance, and each page carries a figure of 3pt fine print to pinch into. Rebuild it with `typst compile zoom-resize.typ`.
+
 ## screenshots/ — suzuri.ai screenshots
 
 Unlike the rest of the testbed, these are not checks. They are the small, tidy vaults the [suzuri.ai](https://suzuri.ai) showcase screenshots are taken from, kept here so a retake after a UI change looks like the others.
